@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tower Tapper</title>
+  <meta name="description" content="An idle clicker on a floating island: tap the glowing crystal, mine gems, buy upgrades and rebirth for Star Shards.">
+  <meta name="theme-color" content="#16123a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0 10 4 5 10 0 4z' fill='%236ff3ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <canvas id="scene" aria-label="A floating island with a glowing crystal. Tap the crystal to mine gems."></canvas>
+
+  <header id="hud">
+    <div class="player-card" id="player-card">
+      <img id="player-face" alt="" hidden>
+      <div class="player-text">
+        <b id="player-name">Connecting…</b>
+        <span id="player-account"></span>
+      </div>
+      <button id="player-sign-in" class="pill" hidden>Sign in</button>
+    </div>
+    <div class="wallet">
+      <div class="gems"><i class="gem-icon" aria-hidden="true"></i><span id="gems">0</span></div>
+      <div class="rates"><span id="per-sec">0</span>/sec · <span id="per-tap">1</span>/tap</div>
+      <div class="shards" id="shards" hidden title="Star Shards: +10% income each">✦ <span id="shard-count">0</span> · ×<span id="multiplier">1</span></div>
+    </div>
+  </header>
+
+  <div id="hint" hidden>Tap the crystal!</div>
+
+  <aside id="shop">
+    <div class="shop-head">
+      <h2>Upgrades</h2>
+      <div class="shop-actions">
+        <button id="open-board" class="pill ghost">🏆 Top 10</button>
+        <button id="submit-score" class="pill">Submit score</button>
+      </div>
+    </div>
+    <ul id="upgrades"></ul>
+    <section id="rebirth-card">
+      <div class="rebirth-text">
+        <b>Rebirth</b>
+        <span id="rebirth-info">Earn 1M gems this run to rebirth.</span>
+        <div class="bar"><div id="rebirth-bar"></div></div>
+      </div>
+      <button id="rebirth-btn" class="pill star" disabled>Rebirth</button>
+    </section>
+  </aside>
+
+  <div id="floaters" aria-hidden="true"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <div id="guest-banner" hidden>
+    <p>Sign in to start.ng to play as your own character and save your score.</p>
+    <div>
+      <button id="banner-sign-in" class="pill">Sign in</button>
+      <button id="banner-dismiss" class="pill ghost">Play as guest</button>
+    </div>
+  </div>
+
+  <dialog id="board-dialog">
+    <div class="dialog-head">
+      <h2>🏆 Top 10</h2>
+      <button class="close" data-close aria-label="Close">✕</button>
+    </div>
+    <table>
+      <thead><tr><th>#</th><th>Player</th><th>Rebirths</th><th>Best gems/sec</th></tr></thead>
+      <tbody id="board-rows"></tbody>
+    </table>
+    <p id="board-note"></p>
+  </dialog>
+
+  <dialog id="rebirth-dialog">
+    <div class="dialog-head">
+      <h2>✦ Rebirth?</h2>
+      <button class="close" data-close aria-label="Close">✕</button>
+    </div>
+    <p>Your gems and upgrades reset. You keep your Star Shards forever, and each one adds <b>+10%</b> to all income.</p>
+    <p class="big">+<span id="rebirth-gain">0</span> ✦</p>
+    <div class="dialog-actions">
+      <button class="pill ghost" data-close>Not yet</button>
+      <button id="rebirth-confirm" class="pill star">Rebirth</button>
+    </div>
+  </dialog>
+
+  <div id="cover-title" hidden>
+    <h1>Tower<br>Tapper</h1>
+    <p>Tap the crystal. Mine the sky.</p>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

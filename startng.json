@@ -1,0 +1,8 @@
+{
+  "leaderboard": {
+    "stats": [
+      { "key": "prestige", "label": "Rebirths", "order": "highest" },
+      { "key": "best_gems", "label": "Best gems/sec", "order": "highest" }
+    ]
+  }
+}
